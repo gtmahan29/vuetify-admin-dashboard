@@ -1,0 +1,43 @@
+@use 'variables';
+
+/* فونت‌ها */
+@font-face {
+    font-family: 'Vazir';
+    src: url(../fonts/Vazir-FD-WOL.woff);
+    font-weight: normal;
+  }
+
+  @font-face {
+    font-family: 'Vazir';
+    src: url(../fonts/Vazir-Medium-FD-WOL.woff);
+    font-weight: 600;
+  }
+  
+  @font-face {
+    font-family: 'Vazir';
+    src: url(../fonts/Vazir-Bold-FD-WOL.woff);
+    font-weight: bold;
+  }
+
+  @font-face {
+    font-family: 'Vazir';
+    src: url(../fonts/Vazir-Black-FD-WOL.woff);
+    font-weight: 900;
+  }
+
+  :root {
+    --v-theme-background: #fafafa !important;
+  }
+
+  * {
+    font-family: 'Vazir' !important;
+  }
+
+  body {
+    background-color: #fafafa !important;
+  }
+
+  button {
+    min-width: unset !important;
+  }
+  

@@ -1,0 +1,22 @@
+@use '../assets/scss/variables' as *;
+@use '../assets/scss/abstracts' as *;
+
+@use 'vuetify/settings' with (
+    // Buttons
+    $button-color: 000,
+    $button-font-size: $fontsize-1,
+    $button-height: 40px,
+    $button-border-radius: 2px,
+    // Overlay
+    $overlay-opacity: 0.7,
+    // Elevation Color
+    $shadow-key-umbra-opacity: rgba(#000, 0.1),
+    $shadow-key-penumbra-opacity: rgba(#000, 0.1),
+    $shadow-key-ambient-opacity: rgba(#000, 0.1),
+    // Menu
+    $menu-content-border-radius: 0,
+    // Tables
+    $table-row-font-size: $fontsize-2,
+    $table-header-font-size: $fontsize-1, 
+    $list-item-nav-title-font-size: $fontsize-3,
+);
