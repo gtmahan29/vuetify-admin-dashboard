@@ -23,20 +23,7 @@
                 </v-btn>
 
                 <v-overlay v-model="overlay" class="d-flex align-center justify-center">
-                    <v-card
-                        class="mr-auto ml-8 elevation-0"
-                        width="400"
-                    >
-                        <v-text-field
-                            density="comfortable"
-                            variant="outlined"
-                            label="جستجو..."
-                            append-inner-icon="mdi-magnify"
-                            single-line
-                            hide-details
-                            class="search-bar w-100 elevation-0">
-                        </v-text-field>
-                    </v-card>
+                   <SearchBox />
                 </v-overlay>
             </div>
             <div 
@@ -62,6 +49,7 @@
 <script setup>
 import { ref, computed, defineProps } from 'vue'
 import { useRoute } from 'vue-router'
+import SearchBox from './SearchBox.vue'
 
 const overlay = ref(false);
 
