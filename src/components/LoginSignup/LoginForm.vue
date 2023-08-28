@@ -56,9 +56,9 @@
 
 <script setup>
 import { ref } from 'vue';
-import axiosInstance from '@/axios.js'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/store'
+import axiosInstance from '@/axios.js'
 
 const username = ref('');
 const password = ref('');

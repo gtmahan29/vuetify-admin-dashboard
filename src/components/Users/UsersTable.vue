@@ -85,28 +85,18 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from "vue"
+import { ref, onMounted } from "vue"
 import { useUserStore } from "@/stores/store"
-import axios from "axios"
+import axiosInstance from "@/axios.js"
 
 const userStore = useUserStore();
 const users = ref([]);
 
 async function fetchUsers() {
     try {
-        const config = {
-            headers: {
-                Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L3dvcmRwcmVzcyIsImlhdCI6MTY5MjYxMjIwNCwibmJmIjoxNjkyNjEyMjA0LCJleHAiOjE2OTMyMTcwMDQsImRhdGEiOnsidXNlciI6eyJpZCI6IjEifX19.T3KFL8pe6iYiw40Q1B5XTVQVvr67vBUe4d_FtIlFuok'
-            }
-        };
-
-        console.log(config);
-
-        const response = await axios.get('http://localhost/wordpress/wp-json/wp/v2/users', config);
+        const response = await axiosInstance.get('/wp/v2/users');
         userStore.setUsers(response.data);
         users.value = userStore.users;
-        console.log(users.value);
-
     }   catch (error) {
         console.log('خطا در بیرون کشیدن کاربران:', error);
     }
@@ -152,7 +142,7 @@ function deleteUsers() {
 
     td {
         text-align: center;
-
+        
         a {
             display: block;
         }
@@ -163,10 +153,11 @@ function deleteUsers() {
             text-align: start !important;
         }
     }
-
+    
     thead {
         th {
             background-color: #fafafa !important;
+            // background-color: #fff;
             color: #000 !important;
             border-right: 1px solid rgba($color: #000, $alpha: 0.1);
             font-size: 12px !important;

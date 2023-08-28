@@ -1,6 +1,6 @@
 import axios from "axios";
 import { defineStore } from "pinia";
-import { useRouter } from "vue-router";
+import PersianDate from 'persian-date';
 
 export const useUserStore = defineStore('user', {
     state: () => ({
@@ -60,5 +60,28 @@ export const useUserStore = defineStore('user', {
                 role: user.roles[0],
             }));
         },
+    },
+});
+
+export const usePostStore = defineStore('post', {
+    state: () => ({
+      posts: [],
+    }),
+    actions: {
+      setPosts(posts) {
+        function convertToPersianDate(date) {
+            return new PersianDate(date).format('YYYY/MM/DD');
+        }
+
+        this.posts = posts.map((post) => ({
+          id: post.id,
+          title: post.title.rendered,
+          content: post.content.rendered,
+          author: post.author,
+          category: post.categories,
+          tag: post.tags,
+          date: convertToPersianDate(post.date)
+        }));
+      },
     },
 });

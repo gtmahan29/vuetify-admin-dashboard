@@ -33,132 +33,71 @@
     </v-app>
 </template>
 
-<script>
-export default {
-    data: () => ({
-        dialog: false,
-        dialogDelete: false,
-        headers: [
-            {
-                title: 'پست‌ها',
-                align: 'start',
-                sortable: false,
-                key: 'subject',
-            },
-            { title: 'نویسنده', align: 'center', key: 'author' },
-            { title: 'دسته‌ها', align: 'center', key: 'category' },
-            { title: 'برچسب‌ها', align: 'center', key: 'tag' },
-            { title: 'تاریخ', align: 'center', key: 'date' },
-            { title: 'عملیات', align: 'center', key: 'actions' },
-        ],
-    }),
+<script setup>
 
-    watch: {
-      dialog (val) {
-        val || this.close()
-      },
-      dialogDelete (val) {
-        val || this.closeDelete()
-      },
+import { ref, onMounted } from "vue"
+import { usePostStore } from "@/stores/store"
+import axiosInstance from "@/axios.js"
+
+// const userStore = useUserStore();
+// const users = ref([]);
+
+// async function fetchUsers() {
+//     try {
+//         const response = await axiosInstance.get('/wp/v2/users');
+//         userStore.setUsers(response.data);
+//         users.value = userStore.users;
+//     }   catch (error) {
+//         console.log('خطا در بیرون کشیدن کاربران:', error);
+//     }
+// }
+
+// onMounted(fetchUsers);
+
+const dialog = ref(false);
+const dialogDelete = ref(false);
+
+const headers = [
+    {
+        title: 'پست‌ها',
+        align: 'start',
+        sortable: false,
+        key: 'title',
     },
+    { title: 'نویسنده', align: 'center', key: 'author' },
+    { title: 'دسته‌ها', align: 'center', key: 'category' },
+    { title: 'تاریخ', align: 'center', key: 'date' },
+    { title: 'عملیات', align: 'center', key: 'actions' },
+];
 
-    created () {
-      this.initialize()
-    },
+const postStore = usePostStore();
 
-    methods: {
-      initialize () {
-        this.posts = [
-        {
-            subject: 'لورم ایپسوم متن ساختگی',
-            author: 'کاربر اول',
-            category: 'دسته‌بندی اول',
-            tag: '-',
-            date: '۱۴۰۲/۰۵/۲۱'
-        },
-        {
-            subject: 'لورم ایپسوم متن ساختگی',
-            author: 'کاربر اول',
-            category: 'دسته‌بندی اول',
-            tag: '-',
-            date: '۱۴۰۲/۰۵/۲۱'
-        },
-        {
-            subject: 'لورم ایپسوم متن ساختگی',
-            author: 'کاربر اول',
-            category: 'دسته‌بندی اول',
-            tag: '-',
-            date: '۱۴۰۲/۰۵/۲۱'
-        },
-        {
-            subject: 'لورم ایپسوم متن ساختگی',
-            author: 'کاربر اول',
-            category: 'دسته‌بندی اول',
-            tag: '-',
-            date: '۱۴۰۲/۰۵/۲۱'
-        },
-        {
-            subject: 'لورم ایپسوم متن ساختگی',
-            author: 'کاربر اول',
-            category: 'دسته‌بندی اول',
-            tag: '-',
-            date: '۱۴۰۲/۰۵/۲۱'
-        },
-        {
-            subject: 'لورم ایپسوم متن ساختگی',
-            author: 'کاربر اول',
-            category: 'دسته‌بندی اول',
-            tag: '-',
-            date: '۱۴۰۲/۰۵/۲۱'
-        },
-        {
-            subject: 'لورم ایپسوم متن ساختگی',
-            author: 'کاربر اول',
-            category: 'دسته‌بندی اول',
-            tag: '-',
-            date: '۱۴۰۲/۰۵/۲۱'
-        },
-        {
-            subject: 'لورم ایپسوم متن ساختگی',
-            author: 'کاربر اول',
-            category: 'دسته‌بندی اول',
-            tag: '-',
-            date: '۱۴۰۲/۰۵/۲۱'
-        },
-        {
-            subject: 'لورم ایپسوم متن ساختگی',
-            author: 'کاربر اول',
-            category: 'دسته‌بندی اول',
-            tag: '-',
-            date: '۱۴۰۲/۰۵/۲۱'
-        },
-        {
-            subject: 'لورم ایپسوم متن ساختگی',
-            author: 'کاربر اول',
-            category: 'دسته‌بندی اول',
-            tag: '-',
-            date: '۱۴۰۲/۰۵/۲۱'
-        },
-        {
-            subject: 'لورم ایپسوم متن ساختگی',
-            author: 'کاربر اول',
-            category: 'دسته‌بندی اول',
-            tag: '-',
-            date: '۱۴۰۲/۰۵/۲۱'
-        },
-        ]
-      },
+const posts = ref([]);
 
-      save () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.desserts[this.editedIndex], this.editedItem)
-        } else {
-          this.desserts.push(this.editedItem)
-        }
-        this.close()
-      },
-    },
+const initialize = async () => {
+    try {
+        const response = await axiosInstance('/wp/v2/posts');
+        postStore.setPosts(response.data);
+        posts.value = postStore.posts
+    } catch (error) {
+        console.log('خطا در بیرون کشیدن پست‌ها:', error);
+    }
 }
+
+onMounted(initialize);
+
+
+
+const save = () => {
+};
+
+const close = () => {
+dialog.value = false;
+};
+
+const closeDelete = () => {
+dialogDelete.value = false;
+};
 
 </script>
 
