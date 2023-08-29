@@ -1,6 +1,6 @@
 <template>
-    <v-app class="posts-table-container">
-        <div class="section-header bg-white d-flex justify-space-between align-center elevation-1">
+    <v-app class="posts-table-container elevation-1">
+        <div class="section-header bg-white d-flex justify-space-between align-center elevation-2">
             <div class="text-subtitle-1 font-family font-weight-black pa-4">آخرین پست‌ها</div>
             <div class="btns ms-auto">
                 <v-btn 
@@ -20,14 +20,50 @@
                 items-per-page-text="آیتم در هر صفحه:"
                 class="posts-table"
             >
-                <template v-slot:item.actions="{ item }">
+            <template v-slot:item.actions="{ item }">
                 <v-icon
                     size="small"
                     @click="deleteItem(item.raw)"
                 >
                     mdi-delete
+
                 </v-icon>
-                </template>
+                <v-dialog
+                    v-model="dialog"
+                    activator="parent"
+                    width="400"
+                >
+                <div class="dialog-header font-weight-black bg-grey-lighten-5 px-4 py-3 elevation-1">حذف پست</div>
+                    <v-card rounded="0" class="bg-white pt-4 pb-6">
+                        <v-card-title class="text-subtitle-2 font-family">آیا مطمئنید می‌خواهید حذف کنید؟</v-card-title>
+                        <v-card-actions class="d-flex justify-center">
+                        <div class="action-btns d-flex align-center justify-center w-100 mt-4">
+                            <v-btn 
+                            elevation="3"
+                            color=""
+                            size="small"
+                            width="100"
+                            height="40"
+                            variant="tonal"
+                            @click="closeDelete"
+                            class="cancel-btn font-weight-bold"
+                            >خیر
+                        </v-btn>    
+                        <v-btn 
+                            elevation="3"
+                            color="#25c16e"
+                            size="small"
+                            height="40"
+                            width="100"
+                            @click="deleteItemConfirm"
+                            class="confirm-btn bg-red font-weight-bold"
+                        >بله
+                        </v-btn>    
+                        </div>    
+                        </v-card-actions>
+                    </v-card>
+                </v-dialog>
+            </template>
             </v-data-table>
         </div>
     </v-app>
@@ -35,24 +71,9 @@
 
 <script setup>
 
-import { ref, onMounted } from "vue"
+import { ref, onMounted, computed } from "vue"
 import { usePostStore } from "@/stores/store"
 import axiosInstance from "@/axios.js"
-
-// const userStore = useUserStore();
-// const users = ref([]);
-
-// async function fetchUsers() {
-//     try {
-//         const response = await axiosInstance.get('/wp/v2/users');
-//         userStore.setUsers(response.data);
-//         users.value = userStore.users;
-//     }   catch (error) {
-//         console.log('خطا در بیرون کشیدن کاربران:', error);
-//     }
-// }
-
-// onMounted(fetchUsers);
 
 const dialog = ref(false);
 const dialogDelete = ref(false);
@@ -85,19 +106,6 @@ const initialize = async () => {
 }
 
 onMounted(initialize);
-
-
-
-const save = () => {
-};
-
-const close = () => {
-dialog.value = false;
-};
-
-const closeDelete = () => {
-dialogDelete.value = false;
-};
 
 </script>
 
@@ -149,5 +157,21 @@ dialogDelete.value = false;
             background-color: #fafafa;
         }
     }
+}
+
+.dialog-header {
+    z-index: 2;
+}
+
+.action-btns {
+        gap: 20px;
+}
+
+.confirm-btn {
+    font-size: $fontsize-3;
+}
+
+.cancel-btn {
+    font-size: $fontsize-3;
 }
 </style>

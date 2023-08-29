@@ -91,10 +91,10 @@ const $router = useRouter();
 
 async function signup() {
   const newUser = {
-    email: email.value,
+    name: fullName.value,
     username: username.value,
+    email: email.value,
     password: password.value,
-    fullName: fullName.value,
   };
 
   useStore.signupUser(newUser);

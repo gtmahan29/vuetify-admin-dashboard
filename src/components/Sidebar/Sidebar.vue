@@ -190,6 +190,10 @@ const posts = reactive([
         title: 'افزودن پست',
         path: '/posts/add'
     },
+    {
+        title: 'دسته‌بندی‌',
+        path: '/posts/category'
+    },
 ]);
 
 const users = reactive([

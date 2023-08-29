@@ -85,3 +85,20 @@ export const usePostStore = defineStore('post', {
       },
     },
 });
+
+export const useCategoryStore = defineStore('category', {
+    state: () => ({
+      categories: [],
+    }),
+    actions: {
+      setCategory(categories) {
+        this.categories = categories.map((category) => ({
+          id: category.id,
+          name: category.name,
+          description: category.description,
+          slug: category.slug,
+          count: category.count,
+        }));
+      },
+    },
+});

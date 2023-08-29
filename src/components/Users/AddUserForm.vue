@@ -1,5 +1,5 @@
 <template>
-    <v-app class="w-75 bg-white">
+    <v-app class="user-form-container w-75 bg-white elevation-1">
         <div class="section-header bg-white d-flex justify-space-between align-center elevation-1">
             <div class="text-subtitle-1 font-family font-weight-black pa-4">افزودن کاربر جدید</div>
             <v-menu location="start">
@@ -28,6 +28,7 @@
         </div>
         <div class="add-user-form d-flex justify-center">
             <form 
+                ref="form"
                 @submit.prevent="signup()"
                 class="d-flex flex-column w-50 pa-8">
                 <v-text-field
@@ -153,14 +154,14 @@ const $router = useRouter();
  */
 async function signup() {
   const newUser = {
+    name: name.value,
     email: email.value,
     username: username.value,
     password: password.value,
-    name: name.value,
   };
 
   useStore.signupUser(newUser);
-  $router.push('/');
+  $router.push('/users');
 }
 
 const { handleSubmit } = useForm({

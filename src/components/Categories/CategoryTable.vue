@@ -1,18 +1,9 @@
 <template>
-    <v-app class="users-table-container elevation-1">
+    <v-app class="category-table-container elevation-1">
         <div class="section-header bg-white d-flex justify-space-between align-center elevation-1">
-            <div class="text-subtitle-1 font-family font-weight-black pa-4">همه‌ی کاربران</div>
-            <div class="users-top d-flex justify-space-between align-center me-4">
-                <v-btn 
-                size="small" 
-                elevation="0"
-                color="#25c16e"
-                to="/users/add"
-                class="user-add text-white font-weight-black me-2"
-                >افزودن کاربر جدید
-            </v-btn>
-            <v-btn 
-                @click="deleteUsers()" 
+            <div class="text-subtitle-1 font-family font-weight-black pa-4">همه‌ی دسته‌ها</div>
+            <div class="categories-top d-flex justify-space-between align-center me-4">
+            <v-btn  
                 size="small"
                 elevation="0"
                 variant="outlined"
@@ -24,16 +15,16 @@
         </div>
         <v-table
             fixed-header
-            height="600px"
+            height="520px"
             density="compact"
-            class="users-table"
+            class="category-table"
         >
             <thead>
                 <tr>
-                    <th>نام کاربری</th>
                     <th>نام</th>
-                    <th>ایمیل</th>
-                    <th>نقش</th>
+                    <th>توضیح</th>
+                    <th>نامک</th>
+                    <th>تعداد</th>
                     <th>
                         <v-checkbox 
                             v-model="check"
@@ -46,27 +37,27 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="user in users" :key="user.id">
+                <tr v-for="category in categories" :key="category.id">
                     <td>
                         <a href="#" class="content-wrapper text-grey-darken-1">
                             <span>
-                                {{ user.username }}
+                                {{ category.name }}
                             </span>
                         </a>
                     </td>
                     <td>
                         <a href="#" class="text-grey-darken-1">
-                            {{ user.name }}
+                            {{ category.description === '' ? '-' : category.description }}
                         </a>
                     </td>
                     <td>
                         <a href="#" class="text-grey-darken-1">
-                            {{ user.email }}
+                            {{ decodeURI(category.slug) }}
                         </a>
                     </td>
                     <td>
                         <a href="#" class="text-grey-darken-1">
-                            {{ user.role === "administrator" ? 'مدیر سایت' : 'مشترک' }}
+                            {{ category.count}}
                         </a>
                     </td>
                     <td>
@@ -85,48 +76,42 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue"
-import { useUserStore } from "@/stores/store"
+import { ref, onMounted, computed, reactive } from "vue"
+import { useCategoryStore } from "@/stores/store"
 import axiosInstance from "@/axios.js"
 
-const userStore = useUserStore();
-const users = ref([]);
+const categoryStore = useCategoryStore();
 
-async function fetchUsers() {
+const categories = ref([]);
+
+// const decodedCategories = computed(() => {
+//     return categories.value.map(category => ({
+//         ...category,
+//         slug: decodeURI(category.slug)
+//     }));
+// })
+
+async function fetchCategories() {
     try {
-        const response = await axiosInstance.get('/wp/v2/users');
-        userStore.setUsers(response.data);
-        users.value = userStore.users;
-    }   catch (error) {
-        console.log('خطا در بیرون کشیدن کاربران:', error);
+        const response = await axiosInstance.get('/wp/v2/categories');
+        categoryStore.setCategory(response.data);
+        categories.value = categoryStore.categories;
+    } catch (error) {
+        console.log('خطا در بیرون کشیدن دسته‌ها:', error);
     }
 }
 
-onMounted(fetchUsers);
-
-function addUser() {
-    console.log('User Added');
-}
-
-function deleteUsers() {
-    console.log('Selected Users Deleted');
-}
-
+onMounted(fetchCategories);
 
 </script>
 
 <style lang="scss">
-.section-header {
-    z-index: 2;
-}
-
-.users-table {
+.category-table {
     width: 100%;
     border-collapse: collapse;
     overflow: hidden;
     white-space: nowrap;
     font-size: 14px !important;
-    border-top: 1px solid rgba($color: #000, $alpha: 0.1);
     
     th {
         width: 1000px;
@@ -169,7 +154,7 @@ function deleteUsers() {
             }
 
             &:last-child {
-                width: 120px;
+                width: 180px;
             }
         }
     }

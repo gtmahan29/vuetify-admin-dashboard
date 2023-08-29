@@ -1,13 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useUserStore } from '@/stores/store'
 import Dashboard from '../views/Dashboard.vue'
-import Posts from '../views/Posts.vue'
+import Posts from '../views/Posts/Posts.vue'
 import Users from '../views/Users/Users.vue'
 import AddUser from '@/views/Users/AddUser.vue'
 import Comments from '../views/Comments.vue'
 import Statistics from '../views/Statistics.vue'
 import Settings from '../views/Settings.vue'
 import Login from '@/views/LoginSignup.vue'
+import PostsCategory from '@/views/Posts/PostsCategory.vue'
 
 const routes = [
   {
@@ -32,6 +33,14 @@ const routes = [
         path: '/posts',
         name: 'posts',
         component: Posts,
+        meta: {
+          requiresAuth: true,
+        }
+      },
+      {
+        path: '/posts/category',
+        name: 'category',
+        component: PostsCategory,
         meta: {
           requiresAuth: true,
         }

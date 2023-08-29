@@ -9,10 +9,10 @@
                 rounded
                 elevation="0"
                 color="transparent"
-                max-width="40"
-                min-width="40"
-                max-height="40"
-                min-height="40"
+                max-width="45"
+                min-width="45"
+                max-height="45"
+                min-height="45"
                 @click="overlay = !overlay"
                 >
                 <v-icon 
