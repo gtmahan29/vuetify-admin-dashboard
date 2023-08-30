@@ -2,25 +2,29 @@
     <v-app class="recent-posts elevation-1">
         <div class="section-header d-flex justify-space-between align-center elevation-1">
             <div class="text-subtitle-1 font-family font-weight-black pa-4">آخرین پست‌ها</div>
-            <div class="btns d-flex  ms-auto">
+            <v-menu location="start">
+                <template v-slot:activator="{ props }">
                 <v-btn 
-                    elevation="0"
-                    color="#800080"
-                    variant="tonal"
-                    size="small"
-                    to="/comments"
-                    class="view-all font-weight-black me-4"
-                >نمایش همه
+                    v-bind="props"
+                    icon="mdi-dots-vertical" 
+                    rounded="0"
+                    width="60"
+                    class="draft-btn bg-white elevation-0 h-100" 
+                >
                 </v-btn>
-                <v-btn 
-                    elevation="0"
-                    color="#25c16e"
-                    size="small"
-                    to="/comments"
-                    class="add-post-btn text-white font-weight-black me-4"
-                >افزودن پست
-                </v-btn>
-            </div>
+                </template>
+
+                <v-list>
+                <v-list-item
+                v-for="(item, i) in items"
+                :key="i"
+                >
+                <RouterLink :to="item.path">
+                    <v-list-item-title class="text-black text-subtitle-2 font-family">{{ item.title }}</v-list-item-title>
+                </RouterLink>
+                </v-list-item>
+                </v-list>
+            </v-menu>
         </div>
         <v-table
             fixed-header
@@ -58,6 +62,28 @@
                 </tr>
             </tbody>
         </v-table>
+
+        <v-divider></v-divider>
+
+        <div class="btns d-flex my-4">
+            <v-btn 
+                elevation="0"
+                color="#800080"
+                variant="tonal"
+                size="small"
+                to="/comments"
+                class="view-all font-weight-black mx-4"
+            >نمایش همه
+            </v-btn>
+            <v-btn 
+                elevation="0"
+                color="#25c16e"
+                size="small"
+                to="/comments"
+                class="add-post-btn text-white font-weight-black"
+            >افزودن پست
+            </v-btn>
+        </div>
     </v-app>
 </template>
 

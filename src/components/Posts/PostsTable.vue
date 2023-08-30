@@ -1,70 +1,148 @@
 <template>
     <v-app class="posts-table-container elevation-1">
-        <div class="section-header bg-white d-flex justify-space-between align-center elevation-2">
-            <div class="text-subtitle-1 font-family font-weight-black pa-4">آخرین پست‌ها</div>
-            <div class="btns ms-auto">
+        <div class="section-header d-flex justify-space-between align-center elevation-1">
+            <div class="text-subtitle-1 font-family font-weight-black pa-4">لیست پست‌ها</div>
+            <v-menu location="start">
+                <template v-slot:activator="{ props }">
                 <v-btn 
-                    elevation="0"
-                    color="#25c16e"
-                    size="small"
-                    to="/posts/add"
-                    class="add-post-btn text-white font-weight-black me-4"
-                >افزودن پست
+                    v-bind="props"
+                    icon="mdi-dots-vertical" 
+                    rounded="0"
+                    width="60"
+                    class="draft-btn bg-white elevation-0 h-100" 
+                >
                 </v-btn>
-            </div>
+                </template>
+
+                <v-list>
+                <v-list-item
+                v-for="(item, i) in items"
+                :key="i"
+                >
+                <RouterLink :to="item.path">
+                    <v-list-item-title class="text-black text-subtitle-2 font-family">{{ item.title }}</v-list-item-title>
+                </RouterLink>
+                </v-list-item>
+                </v-list>
+            </v-menu>
         </div>
         <div class="table-container">
             <v-data-table
                 :headers="headers"
                 :items="posts"
-                items-per-page-text="آیتم در هر صفحه:"
+                items-per-page-text="تعداد کاربر در هر صفحه:"
+                :pageText="'{1} کاربر از {2}'"
                 class="posts-table"
+                v-model="selected"
+                show-select
             >
             <template v-slot:item.actions="{ item }">
-                <v-icon
-                    size="small"
-                    @click="deleteItem(item.raw)"
-                >
-                    mdi-delete
+                <v-menu location="left">
+                    <template v-slot:activator="{ props }">
+                    <v-btn 
+                        v-bind="props"
+                        icon="mdi-dots-horizontal" 
+                        rounded="0"
+                        width="30"
+                        class="draft-btn bg-white elevation-0 h-50" 
+                    >
+                    </v-btn>
+                    </template>
 
-                </v-icon>
-                <v-dialog
-                    v-model="dialog"
-                    activator="parent"
-                    width="400"
-                >
-                <div class="dialog-header font-weight-black bg-grey-lighten-5 px-4 py-3 elevation-1">حذف پست</div>
-                    <v-card rounded="0" class="bg-white pt-4 pb-6">
-                        <v-card-title class="text-subtitle-2 font-family">آیا مطمئنید می‌خواهید حذف کنید؟</v-card-title>
-                        <v-card-actions class="d-flex justify-center">
-                        <div class="action-btns d-flex align-center justify-center w-100 mt-4">
-                            <v-btn 
-                            elevation="3"
-                            color=""
-                            size="small"
-                            width="100"
-                            height="40"
-                            variant="tonal"
-                            @click="closeDelete"
-                            class="cancel-btn font-weight-bold"
-                            >خیر
-                        </v-btn>    
-                        <v-btn 
-                            elevation="3"
-                            color="#25c16e"
-                            size="small"
-                            height="40"
-                            width="100"
-                            @click="deleteItemConfirm"
-                            class="confirm-btn bg-red font-weight-bold"
-                        >بله
-                        </v-btn>    
-                        </div>    
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
+                    <v-list class="d-flex pa-0 bg-grey-lighten-3 rounded-lg elevation-0">
+                    <v-list-item 
+                        min-height="unset"
+                        width="40"
+                        class="text-center pa-2"
+                    >
+                        <font-awesome-icon 
+                        icon="fa-regular fa-trash-can"
+                        size="lg"
+                        color="rgba(0, 0, 0, 0.5)"
+                        @click="deletePost()"/>
+                        <v-dialog
+                            v-model="dialog"
+                            activator="parent"
+                            width="400"
+                        >
+                        <v-card class="bg-white rounded-lg pa-3">
+                                <v-card-title class="font-weight-black font-family">حذف پست</v-card-title>
+                                <v-card-text class="text-subtitle-2 font-family text-grey-darken-1">
+
+                                    <span>
+                                        آیا مطمئنید می‌خواهید این پست را حذف کنید؟
+                                    </span>
+                                </v-card-text>
+                                <v-card-actions class="d-flex">
+                                <div class="action-btns d-flex align-center justify-end w-100 mt-4">
+                                    <v-btn 
+                                    size="small"
+                                    height="40"
+                                    width="50"
+                                    color="purple-darken-3"
+                                    @click="closeDelete"
+                                    class="cancel-btn bg-grey-lighten-5 rounded font-weight-bold"
+                                    >لغو
+                                </v-btn>    
+                                <v-btn 
+                                    size="small"
+                                    height="40"
+                                    width="50"
+                                    color="purple-darken-3"
+                                    @click="deleteItemConfirm"
+                                    class="confirm-btn rounded font-weight-bold"
+                                >تأیید
+                                </v-btn>    
+                                </div>    
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
+                    </v-list-item>
+                    <v-list-item 
+                        min-height="unset"
+                        width="40"
+                        class="text-center pa-2"
+                    >
+                        <font-awesome-icon 
+                        icon="fa-regular fa-pen-to-square"
+                        size="lg"
+                        color="rgba(0, 0, 0, 0.5)"
+                        @click="editPost()"/>
+                        <v-dialog
+                            v-model="dialog"
+                            activator="parent"
+                            width="400"
+                        >
+                           
+                        </v-dialog>
+                    </v-list-item>
+                    </v-list>
+                </v-menu>
+                
             </template>
             </v-data-table>
+
+            <v-divider></v-divider>
+
+            <div class="btns bg-white d-flex py-4 me-4">
+                <v-btn 
+                size="small" 
+                elevation="0"
+                color="#25c16e"
+                to="/posts/add"
+                class="user-add text-white font-weight-black mx-4"
+                >افزودن کاربر جدید
+            </v-btn>
+            <v-btn 
+                @click="deleteUsers()" 
+                size="small"
+                elevation="0"
+                variant="outlined"
+                color="red"
+                class="users-delete font-weight-black"
+                >حذف انتخاب شده‌ها
+            </v-btn>
+            </div>
         </div>
     </v-app>
 </template>
@@ -121,6 +199,26 @@ onMounted(initialize);
     overflow: hidden;
     white-space: nowrap;
     font-size: 14px !important;
+
+    .v-field__input {
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-inline-start: 6px;
+        padding-inline-end: 0;
+        min-height: unset;
+    }
+
+    .v-select__menu-icon {
+        margin-inline-start: 0;
+    }
+
+    .v-field--appended {
+        padding-inline-end: 0;
+    }
+
+    .v-select .v-select__selection  {
+        margin: 2px 0;
+    }
     
     th {
         width: 1000px;
@@ -133,10 +231,9 @@ onMounted(initialize);
     }
 
     td {
-        &:first-child {
-            background-color: #fafafa !important;
+        &:nth-child(2) {
             text-align: start !important;
-            border-right: none;
+            border-right: 1px solid rgba($color: #000, $alpha: 0.1);
         }
     }
     
@@ -147,8 +244,20 @@ onMounted(initialize);
     thead {
         th {
             color: #000 !important;
-            border-right: 1px solid rgba($color: #000, $alpha: 0.1);
+            background-color: #f7f7f7 !important;
             font-weight: bold !important;
+
+            &:nth-child(2) {
+                border-right: 1px solid rgba($color: #000, $alpha: 0.1);
+            }
+        }
+    }
+
+    tr {
+        &:last-child {
+            td {
+                border-bottom: 1px solid rgba($color: #000, $alpha: 0.1);
+            }
         }
     }
 
@@ -159,19 +268,38 @@ onMounted(initialize);
     }
 }
 
+.v-btn__overlay {
+    opacity: 0;
+    background-color: transparent;
+}
+
+.v-card-title {
+    font-size: $fontsize-4;
+}
+
 .dialog-header {
     z-index: 2;
 }
 
-.action-btns {
-        gap: 20px;
-}
-
 .confirm-btn {
     font-size: $fontsize-3;
+    background-color: transparent !important;
+
+    &:hover {
+        .v-btn__overlay {
+            opacity: 0;
+        }
+    }
 }
 
 .cancel-btn {
     font-size: $fontsize-3;
+    background-color: transparent !important;
+    
+    &:hover {
+        .v-btn__overlay {
+            opacity: 0;
+        }
+    }
 }
 </style>

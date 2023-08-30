@@ -1,26 +1,30 @@
 <template>
     <v-app class="users-table-container elevation-1">
-        <div class="section-header bg-white d-flex justify-space-between align-center elevation-1">
-            <div class="text-subtitle-1 font-family font-weight-black pa-4">همه‌ی کاربران</div>
-            <div class="users-top d-flex justify-space-between align-center me-4">
+        <div class="section-header d-flex justify-space-between align-center elevation-1">
+            <div class="text-subtitle-1 font-family font-weight-black pa-4">لیست کاربران</div>
+            <v-menu location="start">
+                <template v-slot:activator="{ props }">
                 <v-btn 
-                size="small" 
-                elevation="0"
-                color="#25c16e"
-                to="/users/add"
-                class="user-add text-white font-weight-black me-2"
-                >افزودن کاربر جدید
-            </v-btn>
-            <v-btn 
-                @click="deleteUsers()" 
-                size="small"
-                elevation="0"
-                variant="outlined"
-                color="red"
-                class="users-delete font-weight-black"
-            >حذف انتخاب شده‌ها
-            </v-btn>
-            </div>
+                    v-bind="props"
+                    icon="mdi-dots-vertical" 
+                    rounded="0"
+                    width="60"
+                    class="draft-btn bg-white elevation-0 h-100" 
+                >
+                </v-btn>
+                </template>
+
+                <v-list>
+                <v-list-item
+                v-for="(item, i) in items"
+                :key="i"
+                >
+                <RouterLink :to="item.path">
+                    <v-list-item-title class="text-black text-subtitle-2 font-family">{{ item.title }}</v-list-item-title>
+                </RouterLink>
+                </v-list-item>
+                </v-list>
+            </v-menu>
         </div>
         <v-table
             fixed-header
@@ -30,10 +34,6 @@
         >
             <thead>
                 <tr>
-                    <th>نام کاربری</th>
-                    <th>نام</th>
-                    <th>ایمیل</th>
-                    <th>نقش</th>
                     <th>
                         <v-checkbox 
                             v-model="check"
@@ -43,10 +43,23 @@
                         >
                         </v-checkbox>
                     </th>
+                    <th>نام کاربری</th>
+                    <th>نام</th>
+                    <th>ایمیل</th>
+                    <th>نقش</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="user in users" :key="user.id">
+                    <td>
+                        <v-checkbox 
+                            v-model="check"
+                            label=""
+                            density="compact"
+                            hide-details
+                        >
+                        </v-checkbox>
+                    </td>
                     <td>
                         <a href="#" class="content-wrapper text-grey-darken-1">
                             <span>
@@ -69,18 +82,31 @@
                             {{ user.role === "administrator" ? 'مدیر سایت' : 'مشترک' }}
                         </a>
                     </td>
-                    <td>
-                        <v-checkbox 
-                            v-model="check"
-                            label=""
-                            density="compact"
-                            hide-details
-                        >
-                        </v-checkbox>
-                    </td>
                 </tr>
             </tbody>
         </v-table>
+
+        <v-divider></v-divider>
+
+        <div class="btns bg-white d-flex py-4">
+            <v-btn 
+                size="small" 
+                elevation="0"
+                color="#25c16e"
+                to="/users/add"
+                class="user-add text-white font-weight-black mx-4"
+                >افزودن کاربر جدید
+            </v-btn>
+            <v-btn 
+                @click="deleteUsers()" 
+                size="small"
+                elevation="0"
+                variant="outlined"
+                color="red"
+                class="users-delete font-weight-black"
+                >حذف انتخاب شده‌ها
+            </v-btn>
+        </div>
     </v-app>
 </template>
 
@@ -146,13 +172,12 @@ function deleteUsers() {
         a {
             display: block;
         }
-    }
-    
-    th, td {
-        &:first-child {
-            text-align: start !important;
+
+        &:nth-child(2) {
+            border-right: 1px solid rgba($color: #000, $alpha: 0.1);
         }
     }
+    
     
     thead {
         th {
@@ -164,11 +189,10 @@ function deleteUsers() {
             font-weight: bold !important;
 
             &:first-child {
-                text-align: start !important;
                 border-right: none;
             }
 
-            &:last-child {
+            &:first-child {
                 width: 120px;
             }
         }

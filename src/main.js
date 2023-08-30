@@ -8,9 +8,9 @@ import { createPinia } from 'pinia';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faUserSecret, faTableColumns, faComments, faPenToSquare as fasPenToSquare, faUserGroup, faScrewdriverWrench, faCog, faThumbsUp, faFilePen, faUsers, faUser, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons'
-import { faPenToSquare as farPenToSquare, faEye } from '@fortawesome/free-regular-svg-icons'
+import { faPenToSquare as farPenToSquare, faEye, faTrashCan } from '@fortawesome/free-regular-svg-icons'
 
-library.add(faUserSecret, faTableColumns, fasPenToSquare, faComments, faUserGroup, faScrewdriverWrench, faCog, faThumbsUp, faFilePen, farPenToSquare, faEye, faUsers, faUser, faEnvelope, faLock);
+library.add(faUserSecret, faTableColumns, fasPenToSquare, faComments, faUserGroup, faScrewdriverWrench, faCog, faThumbsUp, faFilePen, farPenToSquare, faEye, faUsers, faUser, faEnvelope, faLock, faTrashCan);
 
 const app = createApp(App);
 

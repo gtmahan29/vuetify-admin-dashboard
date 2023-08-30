@@ -1,8 +1,7 @@
 <template>
     <v-app class="dashboard-container bg-grey-lighten-5">
       <div class="content">
-        <Navbar title="سلام، ماهان" />
-        <div class="dashboard bg-grey-lighten-5 py-4 px-8">
+        <div class="dashboard bg-grey-lighten-5 pa-8">
           <v-row>
             <v-col md="4" class="align-items-start">
               <AnalysisBox path="/posts" :stats="stats.posts" title="تعداد پست" icon="fa-regular fa-pen-to-square"/>

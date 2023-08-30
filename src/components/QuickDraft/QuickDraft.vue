@@ -27,7 +27,7 @@
           </v-menu>
       </div>
 
-      <v-sheet class="mx-auto w-100">
+      <v-sheet class="d-flex flex-column mx-auto w-100">
         <v-form @submit.prevent>
           <v-text-field
             v-model="subject"
@@ -40,11 +40,12 @@
           ></v-text-field>
 
           <v-textarea 
-          rows="7"
+          rows="9"
           label="محتوا" 
           bg-color="grey-lighten-5"
           no-resize
-          class="mx-4" 
+          hide-details
+          class="mx-4 mb-9" 
           >
         </v-textarea>
 
@@ -59,7 +60,7 @@
               height="40"
               width="200"
               :variant="isHovering ? undefined : 'tonal'"
-              class="submit-btn font-weight-black mx-auto mb-3"
+              class="submit-btn font-weight-black mx-auto mb-3 mt-auto"
               :class="isHovering ? 'text-white' : 'undefined'"
             >
               ذخیره‌ی پیش‌نویس

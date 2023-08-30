@@ -1,5 +1,5 @@
 <template>
-    <v-app>
+    <v-app class="sidebar-container">
         <v-navigation-drawer
         app
         permanent
@@ -7,50 +7,41 @@
         rail
         class="sidebar w-100"
         >
-            <div
-            nav
-            >
-                <a href="#" class="logo d-flex justify-start align-center ps-md-8 py-5">
-                    <img class="" src="../../assets/img/logoipsum-225.svg" alt="Dashboard">
-                    <span class="text-h4 font-family font-weight-black ps-2">آرامیس</span>
-                </a>
-            </div>
-
             <v-card 
                 height="200"
                 class="profile-card pa-8 elevation-0"
             >
                 <v-card-item class="pa-0 mb-8">
-                    <v-list-item class="pa-0">
+                    <div class="pa-0">
                         <RouterLink to="/profile">
-                            <v-row class="flex-column justify-center">
+                            <v-row class="flex-column justify-center ma-0">
                                 <v-col cols="12" class="d-flex align-center justify-center">
                                     <v-avatar size="x-large">
                                         <v-img src="../../assets/img/profile.jpg" cover></v-img>
                                     </v-avatar>
                                 </v-col>
-                                <v-col cols="12" class="d-flex justify-space-between align-center">
+                                <v-col cols="12" class="d-flex justify-center align-center">
                                     <div class="user-info d-flex flex-column">
-                                        <v-list-item-title class="text-subtitle-1 text-black font-weight-black font-family">ماهان عادلی</v-list-item-title>
-                                        <v-chip 
-                                            variant="outlined"
+                                        <div class="profile-name text-subtitle-1 text-black font-weight-black font-family">ماهان عادلی</div>
+                                        <div
                                             color="#800080"
-                                            size="small"
-                                            class="w-75 d-flex justify-center"
-                                        >ادمین</v-chip>
+                                            class="d-flex justify-center ma-0"
+                                        >
+                                            <span class="profile-role px-2 rounded-xl">ادمین</span>
+                                        </div>
                                     </div>
-                                    <v-btn 
+                                    <!-- <v-btn 
                                         elevation="0"
                                         color="red"
                                         size="small"
                                         
                                         class="sign-out-btn font-weight-black ms-auto"
                                     >خروج
-                                    </v-btn>
+                                    </v-btn> -->
                                 </v-col>
                             </v-row>
                         </RouterLink>
-                    </v-list-item>
+                    </div>
                 </v-card-item>
             </v-card>
             
@@ -79,6 +70,7 @@
                             </template>
                         </v-list-item>
                     </template>
+
                     <v-list-item
                         v-for="item in posts"
                         :key="item.path"
@@ -246,6 +238,10 @@ const preferences = reactive([
 <style lang="scss">
 @use '../../assets/scss/abstracts' as *;
 
+.sidebar-container {
+    border-left: 1px solid rgba($color: #000, $alpha: 0.1);
+}
+
 a {
     text-decoration: none;
 }
@@ -256,20 +252,26 @@ a {
 }
 
 .sidebar {
+    border-left: 1px solid rgba($color: #000, $alpha: 0.1);
     .sidebar-item {
         border-bottom: 1px solid rgba($color: #000, $alpha: 0.1);
     }
 
-    .v-list-item-title {
-        font-size: $fontsize-2 !important;
+    .profile-name {
+        font-size: $fontsize-3 !important;
         font-weight: 600;
+    }
+
+    .profile-role {
+        border: 1px solid #800080;
+        font-size: $fontsize-1 !important
+        ;
     }
 }
 
 .logo {
     display: block;
     padding: 1rem 0;
-    border-bottom: 1px solid rgba($color: #000, $alpha: 0.1);
 
     img {
         width: 2.5rem;

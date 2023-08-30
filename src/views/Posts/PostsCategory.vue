@@ -1,12 +1,8 @@
 <template>
     <v-app class="posts-category">
-        <Navbar title="دسته‌ها" />
         <v-main class="content py-4 px-8">
             <v-row>
-                <v-col lg="4">
-                    <AddCategoryForm />
-                </v-col>
-                <v-col lg="8">
+                <v-col>
                     <CategoryTable />
                 </v-col>
             </v-row>

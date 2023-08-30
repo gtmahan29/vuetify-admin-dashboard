@@ -1,5 +1,5 @@
 <template>
-    <v-app class="category-form-container  elevation-1">
+    <v-app class="category-form-container w-75 bg-white elevation-1">
         <div class="section-header bg-white d-flex justify-space-between align-center elevation-1">
             <div class="text-subtitle-1 font-family font-weight-black pa-4">افزودن دسته‌ی جدید</div>
             <v-menu location="start">
@@ -26,10 +26,10 @@
                 </v-list>
             </v-menu>
         </div>
-        <div class="add-category-form border">
+        <div class="add-category-form d-flex justify-center">
             <form 
                 @submit.prevent="addCategory()"
-                class="d-flex flex-column pa-8">
+                class="d-flex flex-column w-50 pa-8">
                 <v-text-field
                     v-model="name"
                     label="نام دسته"

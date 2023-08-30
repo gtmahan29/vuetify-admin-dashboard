@@ -9,6 +9,7 @@ import Statistics from '../views/Statistics.vue'
 import Settings from '../views/Settings.vue'
 import Login from '@/views/LoginSignup.vue'
 import PostsCategory from '@/views/Posts/PostsCategory.vue'
+import AddCategory from '@/views/Posts/AddCategory.vue'
 
 const routes = [
   {
@@ -41,6 +42,14 @@ const routes = [
         path: '/posts/category',
         name: 'category',
         component: PostsCategory,
+        meta: {
+          requiresAuth: true,
+        }
+      },
+      {
+        path: '/posts/category/add',
+        name: 'AddCategory',
+        component: AddCategory,
         meta: {
           requiresAuth: true,
         }

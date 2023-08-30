@@ -1,6 +1,5 @@
 <template>
   <v-app class="posts">
-    <Navbar title="پست‌ها"/>
     <v-main class="content py-4 px-8">
       <PostsTable />
     </v-main>
