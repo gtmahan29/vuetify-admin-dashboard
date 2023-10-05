@@ -1,6 +1,6 @@
 <template>
     <v-app class="add-user">
-        <v-main class="content d-flex justify-center py-4 px-8">
+        <v-main class="content d-flex justify-center">
             <AddUserForm />
         </v-main>
     </v-app>

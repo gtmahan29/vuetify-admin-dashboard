@@ -1,6 +1,6 @@
 <template>
     <v-app class="posts-category">
-        <v-main class="content py-4 px-8">
+        <v-main class="content">
             <v-row>
                 <v-col>
                     <CategoryTable />

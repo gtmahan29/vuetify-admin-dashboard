@@ -7,6 +7,15 @@
         rail
         class="sidebar w-100"
         >
+            <div
+                nav
+                class="pa-3 ps-8"
+            >
+                <a href="#" class="logo d-flex justify-start align-center">
+                    <img class="" src="../../assets/img/logoipsum-225.svg" alt="Dashboard">
+                    <span class="text-h4 font-family font-weight-black ps-2">آرامیس</span>
+                </a>
+            </div>
             <v-card 
                 height="200"
                 class="profile-card pa-8 elevation-0"
@@ -254,7 +263,7 @@ a {
 .sidebar {
     border-left: 1px solid rgba($color: #000, $alpha: 0.1);
     .sidebar-item {
-        border-bottom: 1px solid rgba($color: #000, $alpha: 0.1);
+        // border-bottom: 1px solid rgba($color: #000, $alpha: 0.1);
     }
 
     .profile-name {

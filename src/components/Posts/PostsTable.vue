@@ -1,5 +1,5 @@
 <template>
-    <v-app class="posts-table-container elevation-1">
+    <v-app class="posts-table-container component-shadow rounded-lg">
         <div class="section-header d-flex justify-space-between align-center elevation-1">
             <div class="text-subtitle-1 font-family font-weight-black pa-4">لیست پست‌ها</div>
             <v-menu location="start">
@@ -30,10 +30,10 @@
             <v-data-table
                 :headers="headers"
                 :items="posts"
-                items-per-page-text="تعداد کاربر در هر صفحه:"
-                :pageText="'{1} کاربر از {2}'"
+                :items-per-page="itemsPerPage"
                 class="posts-table"
-                v-model="selected"
+                v-model:page="page"
+                hide-default-footer
                 show-select
             >
             <template v-slot:item.actions="{ item }">
@@ -61,19 +61,18 @@
                         color="rgba(0, 0, 0, 0.5)"
                         @click="deletePost()"/>
                         <v-dialog
-                            v-model="dialog"
+                            v-model="dialogDelete"
                             activator="parent"
                             width="400"
                         >
-                        <v-card class="bg-white rounded-lg pa-3">
-                                <v-card-title class="font-weight-black font-family">حذف پست</v-card-title>
-                                <v-card-text class="text-subtitle-2 font-family text-grey-darken-1">
-
-                                    <span>
+                            <v-card class="bg-white rounded-lg pa-3">
+                                <v-card-title class="text-subtitle-1 font-weight-black font-family pa-2">حذف پست</v-card-title>
+                                <v-card-text class="font-family text-grey-darken-1 pa-2">
+                                    <span class="">
                                         آیا مطمئنید می‌خواهید این پست را حذف کنید؟
                                     </span>
                                 </v-card-text>
-                                <v-card-actions class="d-flex">
+                                <v-card-actions class="d-flex pa-0">
                                 <div class="action-btns d-flex align-center justify-end w-100 mt-4">
                                     <v-btn 
                                     size="small"
@@ -81,7 +80,7 @@
                                     width="50"
                                     color="purple-darken-3"
                                     @click="closeDelete"
-                                    class="cancel-btn bg-grey-lighten-5 rounded font-weight-bold"
+                                    class="dialog-btn bg-grey-lighten-5 rounded font-weight-bold"
                                     >لغو
                                 </v-btn>    
                                 <v-btn 
@@ -90,7 +89,7 @@
                                     width="50"
                                     color="purple-darken-3"
                                     @click="deleteItemConfirm"
-                                    class="confirm-btn rounded font-weight-bold"
+                                    class="dialog-btn rounded font-weight-bold"
                                 >تأیید
                                 </v-btn>    
                                 </div>    
@@ -109,7 +108,7 @@
                         color="rgba(0, 0, 0, 0.5)"
                         @click="editPost()"/>
                         <v-dialog
-                            v-model="dialog"
+                            v-model="dialogEdit"
                             activator="parent"
                             width="400"
                         >
@@ -119,6 +118,14 @@
                     </v-list>
                 </v-menu>
                 
+            </template>
+            <template v-slot:bottom>
+                <div class="text-center pt-2">
+                    <v-pagination
+                    v-model="page"
+                    :length="pageCount"
+                    ></v-pagination>
+                </div>
             </template>
             </v-data-table>
 
@@ -134,7 +141,7 @@
                 >افزودن کاربر جدید
             </v-btn>
             <v-btn 
-                @click="deleteUsers()" 
+                @click="deletePosts()" 
                 size="small"
                 elevation="0"
                 variant="outlined"
@@ -148,13 +155,15 @@
 </template>
 
 <script setup>
-
 import { ref, onMounted, computed } from "vue"
 import { usePostStore } from "@/stores/store"
 import axiosInstance from "@/axios.js"
 
-const dialog = ref(false);
 const dialogDelete = ref(false);
+const dialogEdit = ref(false);
+
+const page = ref(1);
+const itemsPerPage = ref(5);
 
 const headers = [
     {
@@ -166,11 +175,10 @@ const headers = [
     { title: 'نویسنده', align: 'center', key: 'author' },
     { title: 'دسته‌ها', align: 'center', key: 'category' },
     { title: 'تاریخ', align: 'center', key: 'date' },
-    { title: 'عملیات', align: 'center', key: 'actions' },
+    { title: '', align: 'center', key: 'actions' },
 ];
 
 const postStore = usePostStore();
-
 const posts = ref([]);
 
 const initialize = async () => {
@@ -185,6 +193,8 @@ const initialize = async () => {
 
 onMounted(initialize);
 
+const pageCount = computed(() => Math.ceil(posts.value.length / itemsPerPage.value));
+
 </script>
 
 <style lang="scss">
@@ -193,13 +203,8 @@ onMounted(initialize);
 .section-header {
     z-index: 2;
 }
-.posts-table {
-    width: 100%;
-    border-collapse: collapse;
-    overflow: hidden;
-    white-space: nowrap;
-    font-size: 14px !important;
 
+.v-data-table-footer {
     .v-field__input {
         padding-top: 0;
         padding-bottom: 0;
@@ -207,18 +212,28 @@ onMounted(initialize);
         padding-inline-end: 0;
         min-height: unset;
     }
-
+    
     .v-select__menu-icon {
         margin-inline-start: 0;
     }
-
+    
     .v-field--appended {
         padding-inline-end: 0;
     }
-
+    
     .v-select .v-select__selection  {
         margin: 2px 0;
     }
+}
+
+
+.posts-table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 14px !important;
+
     
     th {
         width: 1000px;
@@ -250,6 +265,10 @@ onMounted(initialize);
             &:nth-child(2) {
                 border-right: 1px solid rgba($color: #000, $alpha: 0.1);
             }
+
+            &:last-child {
+                width: 120px;
+            }
         }
     }
 
@@ -273,29 +292,16 @@ onMounted(initialize);
     background-color: transparent;
 }
 
-.v-card-title {
-    font-size: $fontsize-4;
-}
-
-.dialog-header {
-    z-index: 2;
-}
-
-.confirm-btn {
-    font-size: $fontsize-3;
-    background-color: transparent !important;
-
-    &:hover {
-        .v-btn__overlay {
-            opacity: 0;
-        }
+.v-card-text {
+    span {
+        font-size: $fontsize-1 !important;
     }
 }
 
-.cancel-btn {
-    font-size: $fontsize-3;
+.dialog-btn {
+    font-size: $fontsize-2;
     background-color: transparent !important;
-    
+
     &:hover {
         .v-btn__overlay {
             opacity: 0;

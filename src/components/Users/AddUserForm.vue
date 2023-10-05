@@ -1,5 +1,5 @@
 <template>
-    <v-app class="user-form-container w-75 bg-white elevation-1">
+    <v-app class="user-form-container w-75 bg-white component-shadow rounded-lg">
         <div class="section-header bg-white d-flex justify-space-between align-center elevation-1">
             <div class="text-subtitle-1 font-family font-weight-black pa-4">افزودن کاربر جدید</div>
             <v-menu location="start">

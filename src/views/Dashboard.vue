@@ -1,7 +1,7 @@
 <template>
     <v-app class="dashboard-container bg-grey-lighten-5">
       <div class="content">
-        <div class="dashboard bg-grey-lighten-5 pa-8">
+        <div class="dashboard bg-grey-lighten-5">
           <v-row>
             <v-col md="4" class="align-items-start">
               <AnalysisBox path="/posts" :stats="stats.posts" title="تعداد پست" icon="fa-regular fa-pen-to-square"/>
@@ -70,5 +70,9 @@ const stats = reactive({
   .sidebar {
     width: 300px;
   }
+}
+
+.component-shadow {
+  box-shadow: 0 7px 20px rgba(46,35,94,.07) !important;
 }
 </style>

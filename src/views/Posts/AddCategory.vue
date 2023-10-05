@@ -1,6 +1,6 @@
 <template>
     <v-app class="add-category">
-        <v-main class="content d-flex justify-center py-4 px-8">
+        <v-main class="content d-flex justify-center">
             <AddCategoryForm />
         </v-main>
     </v-app>

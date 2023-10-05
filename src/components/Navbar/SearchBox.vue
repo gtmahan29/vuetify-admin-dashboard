@@ -1,5 +1,5 @@
 <template>
-    <v-app class="search-box">
+    <v-app class="search-box component-shadow rounded-lg">
         <v-card
             class="mr-auto elevation-0"
             width="400"

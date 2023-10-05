@@ -1,5 +1,5 @@
 <template>
-    <v-app class="quick-draft h-100 bg-white elevation-1">
+    <v-app class="quick-draft h-100 bg-white component-shadow rounded-lg">
       <div class="section-header d-flex justify-space-between align-center elevation-1 mb-8">
           <div class="text-subtitle-1 font-family font-weight-black pa-4">پیش‌نویس سریع</div>
           <v-menu location="start">

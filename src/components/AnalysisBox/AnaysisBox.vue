@@ -1,5 +1,5 @@
 <template>
-    <v-app class="analysis-box elevation-1">
+    <v-app class="analysis-box component-shadow rounded-lg">
         <v-card
             width="100%"
             class="d-flex flex-column mx-auto">
@@ -103,5 +103,17 @@ const statsClass = computed(() => {
     .red {
         color: red;
     }
+}
+
+// .v-btn {
+//     &:hover {
+//         .v-btn__overlay {
+//             opacity: 0.1 !important;
+//             transition: all 0.1s ease-in-out;
+//         }
+//     }
+// }
+.v-btn__content {
+    line-height: unset !important;
 }
 </style>

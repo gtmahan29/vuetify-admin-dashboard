@@ -1,6 +1,6 @@
 <template>
     <v-app class="users bg-grey-lighten-5">
-        <div class="content py-4 px-8">
+        <div class="content">
           <v-main class="content">
               <UsersTable />
           </v-main>

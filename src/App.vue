@@ -1,15 +1,15 @@
 <template>
   <v-locale-provider locale="fa">
     <v-app class="bg-grey-lighten-5">
-        <div class="navbar">
-          <Navbar />
-        </div>
         <v-row class="ma-0">
           <v-col v-if="!isLoginRoute" cols="2" class="pa-0 mt-20">
             <Sidebar />
           </v-col>
-          <v-col :cols="isLoginRoute ? 12 : 10" class="pb-0 ps-0">
-            <RouterView :key="$route.fullPath"/>
+          <v-col :cols="isLoginRoute ? 12 : 10" class="pa-0">
+            <Navbar />
+            <div class="main-content ma-8">
+              <RouterView :key="$route.fullPath"/>
+            </div>
           </v-col>
         </v-row>
     </v-app>
@@ -31,5 +31,7 @@ const isLoginRoute = computed(() => {
 </script>
 
 <style lang="scss">
-
+.main-content {
+  z-index: 2;
+}
 </style>

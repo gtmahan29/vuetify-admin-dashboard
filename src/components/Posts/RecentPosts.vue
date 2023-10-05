@@ -1,5 +1,5 @@
 <template>
-    <v-app class="recent-posts elevation-1">
+    <v-app class="recent-posts component-shadow rounded-lg">
         <div class="section-header d-flex justify-space-between align-center elevation-1">
             <div class="text-subtitle-1 font-family font-weight-black pa-4">آخرین پست‌ها</div>
             <v-menu location="start">

@@ -1,6 +1,6 @@
 <template>
   <v-app class="posts">
-    <v-main class="content py-4 px-8">
+    <v-main class="content">
       <PostsTable />
     </v-main>
   </v-app>
