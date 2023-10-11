@@ -4,6 +4,7 @@ import { createApp } from 'vue';
 import { registerPlugins } from '@/plugins';
 import VueApexCharts from "vue3-apexcharts";
 import { createPinia } from 'pinia';
+import helpers from './plugins/helpers';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -14,9 +15,17 @@ library.add(faUserSecret, faTableColumns, fasPenToSquare, faComments, faUserGrou
 
 const app = createApp(App);
 
-registerPlugins(app)
+// const plugins = {
+//     install() {        
+//         Vue.helpers = helpers;
+//         Vue.prototype.$helpers = helpers;
+//     }
+// }
+
+registerPlugins(app);
 
 app.use(VueApexCharts);
 app.use(createPinia());
+app.use(helpers);
 
 app.component('font-awesome-icon', FontAwesomeIcon).mount('#app');

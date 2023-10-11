@@ -102,3 +102,18 @@ export const useCategoryStore = defineStore('category', {
       },
     },
 });
+
+export const useAuthStore = defineStore('auth', {
+    stat: () => ({
+        accessToken: null,
+    }),
+    actions: {
+        setAccessToken(token) {
+            if (!token) return;
+            
+            localStorage.setItem('jwtToken', token);
+            console.log(token);
+            this.accessToken = token;
+        },
+    },
+});

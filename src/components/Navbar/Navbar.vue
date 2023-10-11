@@ -7,8 +7,6 @@
             elevation-1
         >
             <v-toolbar height="100" color="white" class="elevation-1">
-                <!-- <v-app-bar-nav-icon></v-app-bar-nav-icon> -->
-
                 <v-toolbar-title class="nav-title ms-8">{{ $route.meta.title }}</v-toolbar-title>
 
                     <div class="text-center ms-auto me-2">

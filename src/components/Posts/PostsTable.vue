@@ -155,9 +155,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from "vue"
-import { usePostStore } from "@/stores/store"
+import { ref, onMounted, computed, inject } from "vue"
+import { useAuthStore, usePostStore } from "@/stores/store"
 import axiosInstance from "@/axios.js"
+import { matchedRouteKey } from "vue-router";
 
 const dialogDelete = ref(false);
 const dialogEdit = ref(false);
@@ -181,9 +182,20 @@ const headers = [
 const postStore = usePostStore();
 const posts = ref([]);
 
+const authStore = useAuthStore();
+
+const $helpers = inject('$helpers');
+// TODO: check the access token. it's undefined.
 const initialize = async () => {
     try {
-        const response = await axiosInstance('/wp/v2/posts');
+        const accessToken = authStore.accessToken;
+        const config = {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        };
+        console.log(accessToken);
+        const response = await $helpers.makeRequest('GET','/wp/v2/posts', config);
         postStore.setPosts(response.data);
         posts.value = postStore.posts
     } catch (error) {
