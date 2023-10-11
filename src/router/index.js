@@ -28,6 +28,7 @@ const routes = [
         component: Dashboard,
         meta: {
           requiresAuth: true,
+          title:"داشبورد" ,
         }
       },
       {
@@ -36,6 +37,7 @@ const routes = [
         component: Posts,
         meta: {
           requiresAuth: true,
+          title:'پست‌ها' ,
         }
       },
       {
@@ -44,6 +46,7 @@ const routes = [
         component: PostsCategory,
         meta: {
           requiresAuth: true,
+          title:'دسته‌بندی‌ها' ,
         }
       },
       {
@@ -52,6 +55,7 @@ const routes = [
         component: AddCategory,
         meta: {
           requiresAuth: true,
+          title:'افزودن دسته‌بندی' ,
         }
       },
       {
@@ -60,6 +64,7 @@ const routes = [
         component: Comments,
         meta: {
           requiresAuth: true,
+          title:'دیدگاه‌ها' ,
         }
       },
       {
@@ -68,6 +73,7 @@ const routes = [
         component: Users,
         meta: {
           requiresAuth: true,
+          title:'کاربران' ,
         },
       },
       {
@@ -76,6 +82,7 @@ const routes = [
         component: () => import('@/views/Users/AddUser.vue'),
         meta: {
           requiresAuth: true,
+          title:'افزودن کاربر',
         }
       },
       {
@@ -84,6 +91,7 @@ const routes = [
         component: Statistics,
         meta: {
           requiresAuth: true,
+          title:'تجزیه و تحلیل‌ها' ,
         }
       },
       {
@@ -92,6 +100,7 @@ const routes = [
         component: Settings,
         meta: {
           requiresAuth: true,
+          title:'تنظیمات' ,
         }
       },
     ],
