@@ -57,22 +57,4 @@ const stats = reactive({
 </script>
 
 <style lang="scss">
-.dashboard-container {
-  .content {
-    .v-application__wrap {
-      min-height: unset;
-    }
-  }
-  .dashboard {
-    font-family: 'Vazir';
-  }
-
-  .sidebar {
-    width: 300px;
-  }
-}
-
-.component-shadow {
-  box-shadow: 0 7px 20px rgba(46,35,94,.07) !important;
-}
 </style>

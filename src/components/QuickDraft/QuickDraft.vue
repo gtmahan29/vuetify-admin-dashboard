@@ -104,5 +104,4 @@ const items = reactive([
 </script>
 
 <style lang="scss">
-
 </style>

@@ -245,46 +245,4 @@ const preferences = reactive([
 </script>
 
 <style lang="scss">
-@use '../../assets/scss/abstracts' as *;
-
-.sidebar-container {
-    border-left: 1px solid rgba($color: #000, $alpha: 0.1);
-}
-
-a {
-    text-decoration: none;
-}
-
-.v-application {
-    position: sticky !important;
-    top: 0;
-}
-
-.sidebar {
-    border-left: 1px solid rgba($color: #000, $alpha: 0.1);
-    .sidebar-item {
-        // border-bottom: 1px solid rgba($color: #000, $alpha: 0.1);
-    }
-
-    .profile-name {
-        font-size: $fontsize-3 !important;
-        font-weight: 600;
-    }
-
-    .profile-role {
-        border: 1px solid #800080;
-        font-size: $fontsize-1 !important
-        ;
-    }
-}
-
-.logo {
-    display: block;
-    padding: 1rem 0;
-
-    img {
-        width: 2.5rem;
-    }
-}
-
 </style>

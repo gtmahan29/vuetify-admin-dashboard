@@ -96,24 +96,4 @@
 </script>
 
 <style lang="scss">
-@use '../../assets/scss/abstracts' as *;
-.add-category-form {
-    gap: 40px;
-
-    .v-field {
-        box-shadow: none !important;
-        // box-shadow: 0 3px 15px rgba(46,35,94,.07) !important;
-    }
-
-    .v-field__overlay {
-
-    }
-}
-
-// .v-pagination__item {
-//     .v-btn {
-//         width: 40px;
-//         height: 40px;
-//     }
-// }
 </style>

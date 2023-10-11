@@ -45,47 +45,4 @@ const tab = ref(null);
 </script>
 
 <style lang="scss">
-.login-signup {
-  .v-application__wrap {
-    min-height: unset;
-    align-items: center;
-  }
-}
-
-.container {
-  box-shadow: 0px 2px 1px -1px var(--v-shadow-key-umbra-opacity, rgba(0, 0, 0, 0.2)), 0px 1px 1px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.14)), 0px 1px 3px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.12));
-}
-
-.forms-container {
-  .v-tab {
-    letter-spacing: 0;
-  }
-
-  .v-card {
-    border-radius: 0;
-    box-shadow: none;
-  }
-
-  .v-slide-group-item--active {
-    border: none;
-  }
-  
-  .v-tab--selected {
-    background-color: rgba($color: #e4e4e4, $alpha: 1);
-    color: #000;
-    box-shadow: inset 0 0 8px 0 rgba($color: #000, $alpha: 0.1);
-  }
-}
-
-.v-window__container {
-  height: 700px !important;
-}
-
-.login-background {
-  background-color: #25c16e;
-  img {
-    width: 75%;
-    margin-bottom: 250px;
-  }
-}
 </style>

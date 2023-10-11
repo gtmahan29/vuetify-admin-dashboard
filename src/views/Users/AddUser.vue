@@ -13,9 +13,4 @@ import AddUserForm from '@/components/Users/AddUserForm.vue'
 </script>
 
 <style lang="scss">
-.add-user {
-    .v-application__wrap {
-        min-height: unset;
-    }
-}
 </style>

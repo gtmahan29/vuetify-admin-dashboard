@@ -18,9 +18,5 @@ import Navbar from '@/components/Navbar/Navbar.vue'
 </script>
 
 <style lang="scss">
-.posts-category {
-    .v-application__wrap {
-      min-height: unset;
-    }
-}
+
 </style>

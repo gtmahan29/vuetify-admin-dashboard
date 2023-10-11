@@ -13,9 +13,5 @@ import PostsTable from '@/components/Posts/PostsTable.vue'
 </script>
 
 <style lang="scss">
-.posts {
-  .v-application__wrap {
-      min-height: unset;
-  }
-}
+
 </style>

@@ -31,6 +31,7 @@ const isLoginRoute = computed(() => {
 </script>
 
 <style lang="scss">
+@import './assets/scss/main.scss';
 .main-content {
   z-index: 2;
 }

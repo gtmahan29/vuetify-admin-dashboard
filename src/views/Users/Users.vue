@@ -14,9 +14,4 @@ import UsersTable from '@/components/Users/UsersTable.vue'
 </script>
 
 <style lang="scss">
-.users {
-    .v-application__wrap {
-        min-height: unset;
-    }
-}
 </style>

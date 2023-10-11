@@ -12,9 +12,5 @@ import AddCategoryForm from '@/components/Categories/AddCategoryForm.vue'
 </script>
 
 <style lang="scss">
-.add-category {
-    .v-application__wrap {
-      min-height: unset;
-    }
-}
+
 </style>

@@ -180,19 +180,4 @@ const visible = ref(false);
 </script>
 
 <style lang="scss">
-@use '../../assets/scss/abstracts' as *;
-
-.section-header {
-    z-index: 2;
-}
-
-.terms-confirm {
-    .v-label {
-        font-size: $fontsize-1 !important;
-    }
-}
-
-.add-user-btn {
-    font-size: $fontsize-3;
-}
 </style>

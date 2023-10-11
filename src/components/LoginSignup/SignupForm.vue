@@ -103,27 +103,7 @@ async function signup() {
 </script>
 
 <style lang="scss">
-@use '../../assets/scss/abstracts' as *;
-
-.signup {
-  .signup-btn {
-    background-color: #800080;
-    color: #fff;
-    font-size: $fontsize-3;
-  }
+.font-family {
+  font-family: 'Vazir' !important;
 }
-
-.v-btn__content {
-  letter-spacing: 0 !important;
-  line-height: 1;
-}
-
-.v-label {
-  font-size: 15px;
-}
-
-.v-field-label--floating {
-  font-size: 12px !important;
-}
-
 </style>

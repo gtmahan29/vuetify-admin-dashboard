@@ -98,19 +98,4 @@ const required = (v) => {
 </script>
 
 <style lang="scss">
-@use '../../assets/scss/abstracts' as *;
-
-.login {
-    .login-btn {
-      background-color: #800080 !important;
-      font-size: $fontsize-3;
-    } 
-
-  a {
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-}
-
 </style>

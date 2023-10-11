@@ -15,7 +15,7 @@
                     </v-card-item>
                     <v-card-text class="px-0">
                         <RouterLink :to="path">
-                            <div class="total text-purple-darken-4 font-weight-black font-family">
+                            <div class="total text-purple-darken-4 font-weight-black">
                                 {{ stats.value }}
                             </div>
                         </RouterLink>
@@ -77,43 +77,4 @@ const statsClass = computed(() => {
 </script>
 
 <style lang="scss">
-@use '../../assets/scss/abstracts' as *;
-
-.font-family {
-    font-family: 'Vazir' !important;
-}
-
-.analysis-box {
-    .total {
-        font-size: $fontsize-4;
-    }
-
-    .v-card {
-        .compare {
-            font-family: 'Vazir' !important;
-            font-size: 13px;
-            letter-spacing: 0;
-        }
-    }
-
-    .green {
-        color: green;
-    }
-
-    .red {
-        color: red;
-    }
-}
-
-// .v-btn {
-//     &:hover {
-//         .v-btn__overlay {
-//             opacity: 0.1 !important;
-//             transition: all 0.1s ease-in-out;
-//         }
-//     }
-// }
-.v-btn__content {
-    line-height: unset !important;
-}
 </style>

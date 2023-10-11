@@ -53,25 +53,5 @@
 </script>
 
 <style lang="scss">
-@use '../../assets/scss/abstracts' as *;
 
-.search-box {
-    .v-application__wrap {
-        min-height: unset;
-    }
-
-    .results-wrapper {
-        .results-preview {
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-    
-            span {
-                font-size: $fontsize-3;
-                font-weight: 600;
-            }
-        }
-    }
-
-}
 </style>
