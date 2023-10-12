@@ -1,5 +1,5 @@
 <template>
-  <v-app class="login-signup d-flex align-center justify-center h-screen">
+  <v-app class="login-signup d-flex align-center justify-center mx-auto">
     <div class="container d-flex w-50 bg-white">
       <div class="forms-container w-50">
         <v-card>

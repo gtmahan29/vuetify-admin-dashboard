@@ -57,7 +57,8 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router'
-import { useUserStore } from '@/stores/store'
+// import { useUserStore } from '@/stores/store'
+import { useAuthStore } from '@/stores/auth.store';
 import axiosInstance from '@/axios.js'
 
 const username = ref('');
@@ -70,27 +71,41 @@ const $router = useRouter();
  * وردپرس api از token تابع لاگین و درخواست
  * @returns {void}
  */
-async function login() {
-  const form = { username: username.value, password: password.value };
-  try {
-    const response = await axiosInstance.post('/jwt-auth/v1/token', form);
-    const token = response.data.token;
-    const userStore = useUserStore();
+// async function login() {
+//   const form = { username: username.value, password: password.value };
+//   try {
+//     const response = await axiosInstance.post('/jwt-auth/v1/token', form);
+//     const token = response.data.token;
+//     const userStore = useUserStore();
 
-    // localStorage در ‌token ذخیره کردن
-    localStorage.setItem('jwtToken', token);
-    userStore.setToken(token);
+//     // localStorage در ‌token ذخیره کردن
+//     localStorage.setItem('jwtToken', token);
+//     userStore.setToken(token);
 
-    // انتقال به صفحه دشبورد بعد از موفقیت‌آمیز بودن لاگین
-    $router.push('/');
-  } catch (error) {
-    if (error.response && error.response.data) {
-      console.log('Error:', error.response.data.message);
-    } else {
-      console.log('An error occurred during login:', error);
-    }
+//     // انتقال به صفحه دشبورد بعد از موفقیت‌آمیز بودن لاگین
+//     $router.push('/');
+//   } catch (error) {
+//     if (error.response && error.response.data) {
+//       console.log('Error:', error.response.data.message);
+//     } else {
+//       console.log('An error occurred during login:', error);
+//     }
+//   };
+// }
+const authStore = useAuthStore();
+
+function login() {
+  const loggedUser = {
+    username: username.value,
+    password: password.value,
   };
+
+    authStore.login(loggedUser);
+    console.log('logged in');
+    $router.push('/');
+    console.log('pushed in');
 }
+
 
 const required = (v) => {
   return !!v || 'پر کردن کادر الزامی‌ است.';

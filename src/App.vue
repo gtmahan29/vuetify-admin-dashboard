@@ -6,7 +6,9 @@
             <Sidebar />
           </v-col>
           <v-col :cols="isLoginRoute ? 12 : 10" class="pa-0">
-            <Navbar />
+            <div v-if="this.$route.path !== '/login'">
+              <Navbar />
+            </div>
             <div class="main-content ma-8">
               <RouterView :key="$route.fullPath"/>
             </div>

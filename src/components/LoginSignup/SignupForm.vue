@@ -79,27 +79,27 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useUserStore } from '@/stores/store.js'
+// import { useUserStore } from '@/stores/store.js'
 
-const useStore = useUserStore();
-const email = ref('');
-const username = ref('');
-const password = ref('');
-const passwordConfirm = ref('');
-const fullName = ref('');
-const $router = useRouter();
+// const useStore = useUserStore();
+// const email = ref('');
+// const username = ref('');
+// const password = ref('');
+// const passwordConfirm = ref('');
+// const fullName = ref('');
+// const $router = useRouter();
 
-async function signup() {
-  const newUser = {
-    name: fullName.value,
-    username: username.value,
-    email: email.value,
-    password: password.value,
-  };
+// async function signup() {
+//   const newUser = {
+//     name: fullName.value,
+//     username: username.value,
+//     email: email.value,
+//     password: password.value,
+//   };
 
-  useStore.signupUser(newUser);
-  $router.push('/');
-};
+//   useStore.signupUser(newUser);
+//   $router.push('/');
+// };
 </script>
 
 <style lang="scss">

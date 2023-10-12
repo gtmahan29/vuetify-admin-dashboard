@@ -217,7 +217,7 @@
 
 <script setup>
 import { ref, onMounted, computed, reactive } from "vue"
-import { useCategoryStore } from "@/stores/store"
+// import { useCategoryStore } from "@/stores/store"
 import axiosInstance from "@/axios.js"
 
 const headers = [
@@ -228,26 +228,26 @@ const headers = [
     { title: '', align: 'center', key: 'actions' },
 ];
 
-const categoryStore = useCategoryStore();
+// const categoryStore = useCategoryStore();
 const categories = ref([]);
 
 const page = ref(1);
 const itemsPerPage = ref(5);
 
-const initialize = async () => {
-    try {
-        const response = await axiosInstance.get('/wp/v2/categories');
-        categoryStore.setCategory(response.data);
-        categories.value = categoryStore.categories;
-        categories.value.map((category => {
-            category.slug = decodeURI(category.slug);
-        }))
-    } catch (error) {
-        console.log('خطا در بیرون کشیدن دسته‌ها:', error);
-    }
-}
+// const initialize = async () => {
+//     try {
+//         const response = await axiosInstance.get('/wp/v2/categories');
+//         categoryStore.setCategory(response.data);
+//         categories.value = categoryStore.categories;
+//         categories.value.map((category => {
+//             category.slug = decodeURI(category.slug);
+//         }))
+//     } catch (error) {
+//         console.log('خطا در بیرون کشیدن دسته‌ها:', error);
+//     }
+// }
 
-onMounted(initialize);
+// onMounted(initialize);
 
 const pageCount = computed(() => Math.ceil(categories.value.length / itemsPerPage.value));
 

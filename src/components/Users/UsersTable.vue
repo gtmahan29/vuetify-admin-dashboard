@@ -156,7 +156,7 @@
 
 <script setup>
 import { ref, onMounted, computed } from "vue"
-import { useUserStore } from "@/stores/store"
+// import { useUserStore } from "@/stores/store"
 import axiosInstance from "@/axios.js"
 
 const dialogDelete = ref(false);
@@ -173,28 +173,28 @@ const headers = [
     { title: '', align: 'center', key: 'actions' },
 ];
 
-const userStore = useUserStore();
+// const userStore = useUserStore();
 const users = ref([]);
 
-const initialize = async () => {
-    try {
-        const response = await axiosInstance.get('/wp/v2/users');
-        userStore.setUsers(response.data);
-        users.value = userStore.users;
-        users.value.map((user) => {
-            if (user.role === 'administrator') {
-                return (user.role = 'ادمین')
-            } else {
-                return (user.role = 'مشترک')
-            }
+// const initialize = async () => {
+//     try {
+//         const response = await axiosInstance.get('/wp/v2/users');
+//         userStore.setUsers(response.data);
+//         users.value = userStore.users;
+//         users.value.map((user) => {
+//             if (user.role === 'administrator') {
+//                 return (user.role = 'ادمین')
+//             } else {
+//                 return (user.role = 'مشترک')
+//             }
             
-        })
-    }   catch (error) {
-        console.log('خطا در بیرون کشیدن کاربران:', error);
-    }
-}
+//         })
+//     }   catch (error) {
+//         console.log('خطا در بیرون کشیدن کاربران:', error);
+//     }
+// }
 
-onMounted(initialize);
+// onMounted(initialize);
 
 const pageCount = computed(() => Math.ceil(users.value.length / itemsPerPage.value));
 

@@ -1,11 +1,11 @@
 import axios from 'axios'
-import { useAuthStore } from '@/stores/store';
+// import { useAuthStore } from '@/stores/store';
 import { provide } from 'vue';
 
 const baseURL = 'http://localhost/wordpress/wp-json';
 
 const helpers = {
-    async makeRequest(method, path, data = {}) {
+        async makeRequest(method, path, data = {}) {
         method = method.toUpperCase();
         const url = `${baseURL}/${path}`;
 

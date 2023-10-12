@@ -121,7 +121,7 @@
 import { ref, reactive } from 'vue'
 import { useField, useForm } from 'vee-validate'
 import { useRouter } from 'vue-router'
-import { useUserStore } from '@/stores/store.js'
+// import { useUserStore } from '@/stores/store.js'
 
 const items = reactive([
     { 
@@ -140,7 +140,7 @@ const items = reactive([
 ])
 
 
-const useStore = useUserStore();
+// const useStore = useUserStore();
 const email = ref('');
 const username = ref('');
 const password = ref('');
@@ -152,27 +152,27 @@ const $router = useRouter();
  * تابع عمل ثبت نام
  * @returns {void}
  */
-async function signup() {
-  const newUser = {
-    name: name.value,
-    email: email.value,
-    username: username.value,
-    password: password.value,
-  };
+// async function signup() {
+//   const newUser = {
+//     name: name.value,
+//     email: email.value,
+//     username: username.value,
+//     password: password.value,
+//   };
 
-  useStore.signupUser(newUser);
-  $router.push('/users');
-}
+//   useStore.signupUser(newUser);
+//   $router.push('/users');
+// }
 
-const { handleSubmit } = useForm({
-validationSchema: {
-    checkbox (value) {
-    if (value === '1') return true
+// const { handleSubmit } = useForm({
+// validationSchema: {
+//     checkbox (value) {
+//     if (value === '1') return true
 
-    return 'Must be checked.'
-    },
-},
-});
+//     return 'Must be checked.'
+//     },
+// },
+// });
 
 const checkbox = useField('checkbox');
 
