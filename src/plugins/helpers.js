@@ -1,5 +1,5 @@
 import axios from 'axios'
-// import { useAuthStore } from '@/stores/store';
+import { useAuthStore } from '@/stores/store';
 import { provide } from 'vue';
 
 const baseURL = 'http://localhost/wordpress/wp-json';
@@ -7,24 +7,23 @@ const baseURL = 'http://localhost/wordpress/wp-json';
 const helpers = {
         async makeRequest(method, path, data = {}) {
         method = method.toUpperCase();
-        const url = `${baseURL}/${path}`;
+        const url = `${baseURL}${path}`;
+        console.log(url);
 
-        // const authStore = useAuthStore();
-        // const token = authStore.accessToken;
+        const authStore = useAuthStore();
+        const token = authStore.accessToken;
         // console.log(token);
 
         const config = {
             method,
             url,
             data,
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            }
+            headers: {},
         };
         
-        // if (token) {
-        //     config.headers.Authorization = `bearer ${token}`
-        // }
+        if (token) {
+            config.headers.Authorization = `bearer ${token}`
+        }
 
         try {
             const response = await axios(config);
@@ -50,8 +49,16 @@ const helpers = {
     }
 };
 
-export default {
-    install: (app) => {
-        provide('$helpers', helpers);
-    }
-}
+export default helpers;
+
+// export default {
+//     install: (app) => {
+//         provide('$helpers', helpers);
+//     }
+// }
+
+// export function useHelpers() {
+//     const $helpers = inject('$helpers');
+
+//     return $helpers;
+// }

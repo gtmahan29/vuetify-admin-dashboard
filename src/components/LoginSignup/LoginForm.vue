@@ -56,9 +56,9 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router'
-// import { useUserStore } from '@/stores/store'
-import { useAuthStore } from '@/stores/auth.store';
+import { useRouter, RouterLink } from 'vue-router'
+import router from '@/router';
+import { useAuthStore } from '@/stores/store';
 import axiosInstance from '@/axios.js'
 
 const username = ref('');
@@ -94,16 +94,29 @@ const $router = useRouter();
 // }
 const authStore = useAuthStore();
 
-function login() {
-  const loggedUser = {
-    username: username.value,
-    password: password.value,
-  };
+async function login() {
+  try {
+    loading.value = true;
+    const userInfo = {
+      username: username.value,
+      password: password.value,
+    };
 
-    authStore.login(loggedUser);
+    const success = await authStore.login(userInfo)
+
     console.log('logged in');
-    $router.push('/');
+    if (success) {
+      router.push('/');
+    } else {
+      console.log('نام کاربری یا رمز عبور اشتباه است.');
+    }
     console.log('pushed in');
+  } catch (error) {
+    console.log('خطایی در فرآیند ورود رخ داده است.');
+  } finally {
+    loading.value = false;
+  }
+
 }
 
 

@@ -156,7 +156,7 @@
 
 <script setup>
 import { ref, onMounted, computed, inject } from "vue"
-// import { useAuthStore, usePostStore } from "@/stores/store"
+import { usePostStore } from "@/stores/store"
 import axiosInstance from "@/axios.js"
 import { matchedRouteKey } from "vue-router";
 
@@ -179,8 +179,16 @@ const headers = [
     { title: '', align: 'center', key: 'actions' },
 ];
 
-// const postStore = usePostStore();
+const postStore = usePostStore();
 const posts = ref([]);
+
+function initialize() {
+    postStore.fetchPosts();
+    posts.value = postStore.posts;
+}
+
+onMounted(initialize);
+
 
 // const authStore = useAuthStore();
 
